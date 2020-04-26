@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A.D.J. Airlines</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+		<link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+		<link rel='stylesheet' type='text/css' href='css/app.css'>
+  </head>
+  <style>
+    body{
+      background-image: url('image/airplane5.jpg');
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      /* background-color: #4C4646; */
+    }
+
+    li {
+      float: right;
+    }
+
+    li:last-child {
+      border-right: none;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    .active {
+      background-color: #34727E;
+    }
+  </style>
+  <body>
+    <!-- Sticky not working -->
+    <div style='position: sticky'>
+        <ul>
+          <li class="active"><a href="home">Home</a></li>
+          <li class="active"><a href="flightspage">Flights</a></li>
+          <li class="active"><a href="signUp">Sign Up</a></li>
+          <li class="active"><a href="login">Login</a></li>
+          <li style="float:left" class="navbar-brand"><a href="about">A.D.J. Airlines</a></li>
+        </ul>
+    </div>

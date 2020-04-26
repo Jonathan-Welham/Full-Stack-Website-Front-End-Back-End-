@@ -1,0 +1,66 @@
+body{
+  background-image: url('image/airplane.jpg');
+}
+
+h1{
+  text-align: center;
+  font-style: italic;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: row;
+  justify-content: space-around;
+  padding: 10px;
+  align-items: space-between space-around space-evenly stretch;
+}
+
+.container0{
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  margin: 35px;
+  border: 9px solid #4C4646;
+  border-radius: 25px;
+
+}
+
+#invisible{
+  visibility: hidden;
+}
+
+#index3{
+  background-color: #D6D8C3;
+}
+
+#index3 > div{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    font-size: 25px;
+    text-align: center;
+    margin: 5px;
+}
+
+#structure{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: '';
+  border: 12px solid black;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.leftHolder > div{
+ background-color: white;
+ border: 5px solid blue;
+ margin: 5px;
+
+}
+
+.rightHolder{
+  width: 300px;
+}
