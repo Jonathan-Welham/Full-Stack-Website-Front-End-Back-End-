@@ -26,23 +26,15 @@ app.set('view engine', 'ejs');
 
 
 /*MySQL Configuration*/
-var connection = mysql.createConnection({
-    hots:'d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-    user:'tzlry3naw0wu3zx2',
-    password:'v3iz92y0cpypv8cn',
-    database:'wtczbcjgyshsp8x5'
-});
-connection.connect();
-
-// function herokuConnection() {
-//   let con = mysql.createConnection({
-//     host:'d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-//     user:'tzlry3naw0wu3zx2',
-//     password:'v3iz92y0cpypv8cn',
-//     database:'wtczbcjgyshsp8x5'
-//   });
-//   return con;
-// }
+function herokuConnection() {
+  let con = mysql.createConnection({
+    host: 'd6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',//'tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'tzlry3naw0wu3zx2',//'gd1oi0dy3iw6j5ko',
+    password:'v3iz92y0cpypv8cn',//'qzvdhqzyfih3mkg8',
+    database:'wtczbcjgyshsp8x5'//'z4xov718n5i3s7k9'
+  });
+  return con;
+}
 
 
 /* Middleware */
@@ -54,6 +46,7 @@ function isAuthenticated(req, res, next){
 
 /* Helper Functions */
 function checkUsername(username){
+  var connection = herokuConnection();
   let stmt = 'SELECT * FROM users WHERE username=?';
   return new Promise(function(resolve, reject){
      connection.query(stmt, [username], function(error, results){
