@@ -1,3 +1,10 @@
+/* Section for DB Table names (for clarity) */
+//michael reeves user is storing all 20 preset flights
+let mUserTable = "users";
+let mFlightsTable = "flights";
+let mAirportsTable = "airports";
+
+
 /* Require external APIs and start our application instance */
 var express = require('express');
 var mysql = require('mysql');
@@ -7,16 +14,23 @@ var app = express();
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+/*MySQL Configuration*/
+function herokuConnection() {
+  let con = mysql.createConnection({
+    hots:'un0jueuv2mam78uv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com ',
+    user:'qvf8vxh0rdduv2gg',
+    password:'f8o1mvy0nowab7c0',
+    database:'ddjfarfxnodbdjgp'
+  });
 
-// const connection = mysql.createConnection({
-//     host: '',
-//     user: '',
-//     password: '',
-//     database: ''
-// });
-// connection.connect();
+  return con;
+}
 
-/* The handler for the DEFAULT route */
+
+/* Helper Functions */
+
+
+/* Routes */
 app.get('/', function(req, res){
     res.render('home');
 });
