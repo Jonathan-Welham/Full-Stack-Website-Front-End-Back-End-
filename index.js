@@ -78,16 +78,26 @@ app.get('/home', function(req, res){
 
 //Login/SignUp Routes
 app.get('/signup', function(req, res){
-
   res.render('signup');
 });
 
 app.post('/signup', function(req, res){
+  let salt = 10;
+  bcrypt.hash(req, req.body.password, salt, function(error, result){
+    if(error) throw error;
+    var connection = herokuConnection();
+    let stmt = 'INSERT INTO users (username, password) VALUES (?, ?)';
+    let data = [req.body.username, hash];
+    connection.query(stmt, data, function(error, result){
+       if(error) throw error;
+       res.redirect('/login');
+    });
+    connection.end();
+  });
 
 });
 
 app.get('/login', function(req, res){
-
   res.render('login')
 })
 
