@@ -1,16 +1,33 @@
 {
   "name": "cst336_finalproject",
   "version": "1.0.0",
-  "description": "",
+  "description": "4/26/2020 1:52AM -JW\r -First Commit",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Jonathan, Daniel, Athena",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
     "ejs": "^3.1.2",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
-  }
+    "jquery": "^3.5.0",
+    "mysql": "^2.18.1",
+    "node": "^14.0.0",
+    "session": "^0.1.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jonathan-Welham/CST336_FinalProject.git"
+  },
+  "keywords": [
+    "Final_Project"
+  ],
+  "bugs": {
+    "url": "https://github.com/Jonathan-Welham/CST336_FinalProject/issues"
+  },
+  "homepage": "https://github.com/Jonathan-Welham/CST336_FinalProject#readme"
 }
