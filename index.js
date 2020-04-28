@@ -22,7 +22,6 @@ function herokuConnection() {
     password:'f8o1mvy0nowab7c0',
     database:'ddjfarfxnodbdjgp'
   });
-
   return con;
 }
 
@@ -40,6 +39,7 @@ app.get('/home', function(req, res){
 });
 
 app.get('/signup', function(req, res){
+
   res.render('signup');
 });
 
