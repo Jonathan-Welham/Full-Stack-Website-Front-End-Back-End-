@@ -1,11 +1,14 @@
-/* Section for DB Table names (for clarity) */
-//michael reeves user is storing all 20 preset flights
-let mUserTable = "users";
-let mFlightsTable = "flights";
-let mAirportsTable = "airports";
+/* Database Table Names */
+let authorTable = `l9_author`;
+let quotesTable = `l9_quotes`;
+let userTable = `users`;
 
+//Base Variables for Weather Data
+let mLon = 0.0;
+let mLat = 0.0;
 
-/* Require external APIs and start our application instance */
+/*App config*/
+/*Heroku config line: mysql://pfnztbj0jssyafv8:wygjtwvkebhwfirn@un0jueuv2mam78uv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/vechx3rourud5mk8 */
 var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
@@ -13,50 +16,58 @@ var session = require('express-session');
 var bcrypt = require('bcrypt');
 var app = express();
 
-
-/* Configure our server to read public folder and ejs files */
-app.use(express.static('public'));
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     secret: 'top secret code!',
     resave: true,
     saveUninitialized: true
 }));
-app.set('view engine', 'ejs');
+app.use(express.static("public")); //folder for images, css, js
 
+/*MySQL DB -- Local Server Connection Config*/
+// function localConnection() {
+//   let con = mysql.createConnection({
+//     hots:'localhost',
+//     user:'daniel',
+//     password:'password',
+//     database:'quotes'
+//   });
+//
+//   return con;
+// }
 
-/*MySQL Configuration*/
+/*MySQL DB -- JawsMariaDB Connection Config*/
 function herokuConnection() {
   let con = mysql.createConnection({
-    host: 'd6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',//'tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-    user: 'tzlry3naw0wu3zx2',//'gd1oi0dy3iw6j5ko',
-    password:'v3iz92y0cpypv8cn',//'qzvdhqzyfih3mkg8',
-    database:'wtczbcjgyshsp8x5'//'z4xov718n5i3s7k9'
+    host:'d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user:'tzlry3naw0wu3zx2',
+    password:'v3iz92y0cpypv8cn',
+    database:'wtczbcjgyshsp8x5'
   });
   return con;
 }
 
+/* Helper Functions */
 
-/* Middleware */
 function isAuthenticated(req, res, next){
     if(!req.session.authenticated) res.redirect('/login');
     else next();
 }
 
-
-/* Helper Functions */
 function checkUsername(username){
-  var connection = herokuConnection();
-  let stmt = 'SELECT * FROM users WHERE username=?';
-  return new Promise(function(resolve, reject){
-     connection.query(stmt, [username], function(error, results){
-         if(error) throw error;
-         resolve(results);
-     });
-  });
+    let stmt = 'SELECT * FROM users WHERE username=?';
+    var con = herokuConnection();
+    return new Promise(function(resolve, reject){
+       con.query(stmt, [username], function(error, results){
+           if(error) throw error;
+           con.end();
+           resolve(results);
+       });
+    });
 }
 
-function checkPassword(password){
+function checkPassword(password, hash){
   return new Promise(function(resolve, reject){
      bcrypt.compare(password, hash, function(error, result){
         if(error) throw error;
@@ -65,61 +76,154 @@ function checkPassword(password){
   });
 }
 
+function getAirportSearchData(query){
+  var searchKeyword = query.airport;
+  let stmt = `SELECT * FROM airports WHERE name LIKE '%${searchKeyword}%'`;
+  let con = herokuConnection();
+  return new Promise(function(resolve, reject){
+     con.query(stmt, [searchKeyword], function(error, results){
+         if(error) throw error;
+         con.end();
+         resolve(results);
+     });
+  });
+}
+
+function getCitySearchData(query){
+  var searchKeyword = query.city;
+  let stmt = `SELECT * FROM airports WHERE cityName LIKE '%${searchKeyword}%'`;
+  let con = herokuConnection();
+  return new Promise(function(resolve, reject){
+     con.query(stmt, [searchKeyword], function(error, results){
+         if(error) throw error;
+         con.end();
+         resolve(results);
+     });
+  });
+}
+
+function getLatAndLon(query){
+  let stmt = `SELECT lat, lon FROM airports WHERE cityname=?`;
+  let con = herokuConnection();
+  return new Promise(function(resolve, reject){
+     con.query(stmt, [query.weather], function(error, results){
+         if(error) throw error;
+         con.end();
+         resolve(results);
+     });
+  });
+}
+
+
 
 /* Routes */
-//Home Pages
-app.get('/', function(req, res){
-    res.render('home');
+//home Routes
+app.get('/', function (req, res){
+  res.redirect('/home');
 });
-
 app.get('/home', function(req, res){
-  res.render('home');
+  var results = [];
+  res.render('home', {"results":results});
 });
 
-//Login/SignUp Routes
-app.get('/signup', function(req, res){
-  res.render('signup');
-});
-
-app.post('/signup', function(req, res){
-  let salt = 10;
-  bcrypt.hash(req, req.body.password, salt, function(error, result){
-    if(error) throw error;
-    var connection = herokuConnection();
-    let stmt = 'INSERT INTO users (username, password) VALUES (?, ?)';
-    let data = [req.body.username, hash];
-    connection.query(stmt, data, function(error, result){
-       if(error) throw error;
-       res.redirect('/login');
-    });
-    connection.end();
-  });
-
-});
-
+//login routes used in a modal
 app.get('/login', function(req, res){
-  res.render('login')
-})
-
-app.post('/login', function(req, res){
-
+  res.render('login');
+});
+app.post('/login', async function(req, res){
+    let isUserExist   = await checkUsername(req.body.username);
+    if(isUserExist.length > 0) { console.log("USER FOUND"); } else { console.log("USER NOT FOUND"); }
+    let hashedPasswd  = isUserExist.length > 0 ? isUserExist[0].password : '';
+    let passwordMatch = await checkPassword(req.body.password, hashedPasswd);
+    if(passwordMatch){
+      console.log("PASSWORDS MATCH");
+        req.session.authenticated = true;
+        req.session.user = isUserExist[0].username;
+        res.redirect('/home');
+    }
+    else{
+        console.log("PASSWORDS DON'T MATCH");
+        res.render('login', {error: true});
+    }
 });
 
-//Login Required Access
-app.get('/flightspage', function(req, res){
-  res.render('flightspage');
+/* Register Routes */
+app.get('/register', function(req, res){
+    res.render('register');
+});
+app.post('/register', function(req, res){
+    let salt = 10;
+    bcrypt.hash(req.body.password, salt, function(error, hash){
+        if(error) throw error;
+        let stmt = 'INSERT INTO users (username, password) VALUES (?, ?)';
+        let connection = herokuConnection();
+        let data = [req.body.username, hash];
+        connection.query(stmt, data, function(error, result){
+           if(error) throw error;
+           connection.end();
+           res.redirect('/login');
+        });
+    });
 });
 
-app.get('/about', function(req, res){
-  res.render('about')
-})
-
-/* The handler for undefined routes */
-app.get('*', function(req, res){
-   res.render('error');
+/* Logout Route */
+app.get('/logout', function(req, res){
+   req.session.destroy();
+   res.redirect('/');
 });
 
-/* Start the application server */
-app.listen(process.env.PORT || 3000, function(){
-    console.log('Server has been started');
+/* Search Fields */
+app.get('/citysearch', async function(req, res){
+    let airportData = await getAirportSearchData(req.query);
+    res.render('citysearch', {"results": airportData});
+});
+
+app.get('/airportsearch', async function(req, res){
+    let cityData = await getCitySearchData(req.query);
+    res.render('airportsearch', {"results": cityData});
+});
+
+app.get('/weathersearch', async function(req, res){
+  //AJAX Call
+  let mLonAndLat = await getLatAndLon(req.query);
+  if(mLonAndLat.length <= 0) {
+    mLon = 0;
+    mLat = 0;
+  } else {
+    mLon = mLonAndLat[0].lon;
+    mLat = mLonAndLat[0].lat;
+  }
+  console.log("lon and lat= " + mLon + " " + mLat);
+  res.render('weathersearch', {"mLon":mLon, "mLat":mLat, "cityName":req.query.weather});
+});
+
+app.get('/weathersearchData', async function(req, res){
+  res.send({"mLon":mLon, "mLat":mLat, "cityName":req.query.weather});
 })
+
+
+/* Flight Planner */
+app.get('/planFlight', isAuthenticated, function(req, res){
+  res.render('planFlight');
+});
+
+app.post('/planFlight', isAuthenticated, function(req, res){
+
+  res.render('planFlight');
+});
+
+
+
+/* Error Route */
+app.get("*", async function(req, res){
+    res.render("error");
+});
+//Console output
+app.listen(process.env.PORT, function() {
+  console.log("Express server is running...");
+});
+
+//opening server and opening listening channel
+var server = app.listen(3000, function() {
+  //opens server on port 3000, does stuff
+});
