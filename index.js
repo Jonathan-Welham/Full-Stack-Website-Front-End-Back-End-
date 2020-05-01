@@ -6,6 +6,8 @@ let userTable = `users`;
 //Base Variables for Weather Data
 let mLon = 0.0;
 let mLat = 0.0;
+let idUser = 0;
+var isLoggedIn = false;
 
 /*App config*/
 /*Heroku config line: mysql://pfnztbj0jssyafv8:wygjtwvkebhwfirn@un0jueuv2mam78uv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/vechx3rourud5mk8 */
@@ -114,6 +116,17 @@ function getLatAndLon(query){
   });
 }
 
+function getFlights(){
+  let stmt = 'SELECT * FROM flights WHERE idusers=' + idUser;
+  let con = herokuConnection();
+  return new Promise(function(resolve, reject){
+    con.query(stmt, function(error, results){
+       if(error) throw error;
+       con.end();
+       resolve(results);
+    });
+  });
+}
 
 
 /* Routes */
@@ -124,7 +137,7 @@ app.get('/', function (req, res){
 app.get('/home', function(req, res){
   //Was attempting to show search data in home page but it wasn't worth it
   var results = [];
-  res.render('home', {"results":results});
+  res.render('home', {"results":results, "isLoggedIn": isLoggedIn});
 });
 
 //login routes used in a modal
@@ -133,17 +146,19 @@ app.get('/login', function(req, res){
 });
 app.post('/login', async function(req, res){
     let isUserExist   = await checkUsername(req.body.username);
-    if(isUserExist.length > 0) { console.log("USER FOUND"); } else { console.log("USER NOT FOUND"); }
+    // if(isUserExist.length > 0) { console.log("USER FOUND"); } else { console.log("USER NOT FOUND"); }
     let hashedPasswd  = isUserExist.length > 0 ? isUserExist[0].password : '';
     let passwordMatch = await checkPassword(req.body.password, hashedPasswd);
     if(passwordMatch){
-      console.log("PASSWORDS MATCH");
+      // console.log("PASSWORDS MATCH");
         req.session.authenticated = true;
         req.session.user = isUserExist[0].username;
-        res.redirect('/home');
+        idUser = isUserExist[0].idusers;
+        isLoggedIn = true;
+        res.redirect('/planFlight');
     }
     else{
-        console.log("PASSWORDS DON'T MATCH");
+        // console.log("PASSWORDS DON'T MATCH");
         res.render('login', {error: true});
     }
 });
@@ -170,6 +185,8 @@ app.post('/register', function(req, res){
 /* Logout Route */
 app.get('/logout', function(req, res){
    req.session.destroy();
+   idUser = 0;
+   isLoggedIn = false;
    res.redirect('/');
 });
 
@@ -223,16 +240,33 @@ app.post('/planFlight', isAuthenticated, function(req, res){
   // if(destination == "" || departure == "" || arrivalDate == null || departDate== null || seats <= 0){
   //   console.log("Field Left Blank!");
   // } //checking for a empty field WIP
-  console.log(destination + " " + departure + " " + arrivalDate + " " + departDate + " " + seats);
+  // console.log(destination + " " + departure + " " + arrivalDate + " " + departDate + " " + seats);
 
-  let stmt = 'INSERT INTO flights';
-
-  res.render('userflights');
+  let stmt = 'INSERT INTO flights (idusers, destination, departure, departureDay, destinationDay, seats) VALUES (?,?,?,?,?,?)';
+  let data = [idUser, destination, departure, departDate, arrivalDate, seats];
+  let con = herokuConnection();
+  con.query(stmt, data, function(error, result){
+     if(error) throw error;
+     con.end();
+     res.redirect('/userflights');
+  });
 });
 
-app.get('/userflights', isAuthenticated, function(req, res){
+
+app.get('/userflights', isAuthenticated, async function(req, res){
 //show data
-  res.render('userflights');
+  let results = await getFlights();
+  res.render('userflights' , {"results": results});
+});
+
+app.get('/userflights/:idflights/delete', isAuthenticated, function(req, res){
+  let stmt = 'DELETE FROM flights WHERE idflights=' + req.params.idflights;
+  let con = herokuConnection();
+  con.query(stmt, function(error, result){
+      if(error) throw error;
+      con.end();
+      res.redirect('/userflights');
+  });
 });
 
 

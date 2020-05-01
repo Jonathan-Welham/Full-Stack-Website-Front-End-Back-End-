@@ -19,12 +19,20 @@
        <li class="nav-item"> <!--nav-item active highlights it-->
           <a class="nav-link" href="/login">Login</a>
        </li>
+       <li class="nav-item"> <!--nav-item active highlights it-->
+          <a class="nav-link" href="/logout">Logout</a>
+       </li>
         <li class="nav-item">
           <a class="nav-link" href="/register">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/planFlight">Plan A Flight</a>
         </li>
+        <% if(isLoggedIn){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/userflights">My Flights</a>
+          </li>
+        <%}%>
       </ul>
   </div>
 </nav>

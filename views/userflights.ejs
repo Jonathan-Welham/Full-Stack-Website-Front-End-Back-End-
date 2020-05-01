@@ -15,6 +15,9 @@
        <li class="nav-item"> <!--nav-item active highlights it-->
           <a class="nav-link" href="/login">Login</a>
        </li>
+       <li class="nav-item"> <!--nav-item active highlights it-->
+          <a class="nav-link" href="/logout">Logout</a>
+       </li>
         <li class="nav-item">
           <a class="nav-link" href="/register">Register</a>
         </li>
@@ -30,9 +33,26 @@
 
 <div class="container text-center">
   <div class="jumbotron">
-
-  </div>
-
-</div>
-
+    <h1>List of User Flights</h1>
+    <table>
+      <tr>
+        <th>Flight ID</th>
+        <th>Destination Location</th>
+        <th>Departure Location</th>
+        <th>Date of Arrival</th>
+        <th>Date of Departure</th>
+        <th>Amount of Seats</th>
+      </tr>
+      <% results.forEach(function(result){ %>
+          <tr>
+            <td><%=result.idflights%></td>
+            <td><%=result.destination%></td>
+            <td><%=result.departure%></td>
+            <td><%=result.destinationDay%></td>
+            <td><%=result.departureDay%></td>
+            <td><%=result.seats%></td>
+            <td><a class="btn btn-link" href="/userflights/<%= result.idflights %>/delete" name="deleteBtn">Delete Flight</a></td>
+          </tr>
+        </div>
+     <%});%>
 <%- include ('templates/footer'); -%>
