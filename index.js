@@ -122,6 +122,7 @@ app.get('/', function (req, res){
   res.redirect('/home');
 });
 app.get('/home', function(req, res){
+  //Was attempting to show search data in home page but it wasn't worth it
   var results = [];
   res.render('home', {"results":results});
 });
@@ -206,6 +207,12 @@ app.get('/weathersearchData', async function(req, res){
 app.get('/planFlight', isAuthenticated, function(req, res){
 //grab data
   res.render('planFlight');
+});
+
+app.post('/planFlight', isAuthenticated, function(req, res){
+
+
+  res.render('/');
 });
 
 app.get('/userflights', isAuthenticated, function(req, res){
