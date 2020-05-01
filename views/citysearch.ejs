@@ -1,0 +1,40 @@
+<%- include ('templates/header'); -%>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="/home">Skimpy Airlines</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+       <li class="nav-item"> <!--nav-item active highlights it-->
+          <a class="nav-link" href="/login">Login</a>
+       </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/flights">Plan A Flight</a>
+        </li>
+      </ul>
+  </div>
+</nav>
+
+  <div class='container text-center'>
+  	<div class='jumbotron'>
+  		<h2> Results For Cities With Specific Airports Search: </h2>
+        <%if(results.length <= 0){%>
+            <h3 style="text-color: red">Nothing Found</h3>
+          <%}%>
+        <% results.forEach( function(result){%>
+            <p>City Name: <%= result.cityName %></p>
+            <br>
+        <%});%>
+
+  	</div>
+
+<%- include ('templates/footer'); -%>

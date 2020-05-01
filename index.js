@@ -204,13 +204,16 @@ app.get('/weathersearchData', async function(req, res){
 
 /* Flight Planner */
 app.get('/planFlight', isAuthenticated, function(req, res){
+//grab data
   res.render('planFlight');
 });
 
-app.post('/planFlight', isAuthenticated, function(req, res){
-
-  res.render('planFlight');
+app.get('/userflights', isAuthenticated, function(req, res){
+//show data
+  res.render('userflights');
 });
+
+
 
 
 

@@ -1,0 +1,71 @@
+<%- include ('templates/header'); -%>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="/home">Skimpy Airlines</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+       <li class="nav-item"> <!--nav-item active highlights it-->
+          <a class="nav-link" href="/login">Login</a>
+       </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/flights">Plan A Flight</a>
+        </li>
+      </ul>
+  </div>
+</nav>
+
+  <div class='container text-center'>
+  	<div class='jumbotron'>
+
+      <button type="button" class="btn btn-secondary" name="showAjax" id="showAjax">Show</button>
+        <div>
+            <p id="weatherType"> Weather Currently: </p>
+        </div>
+
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $("body").on("click", '#showAjax', function(e){
+              console.log("Button Clicked");
+
+              $.get('weathersearchData', {}, function(data){
+                e.preventDefault();
+                  var mLon = Math.floor(data.mLon * 100) / 100;
+                  var mLat = Math.floor(data.mLat * 100) / 100;
+                  console.log(mLon + " " + mLat);
+                  $.ajax({
+                    method: "GET",
+                        url:"http://api.openweathermap.org/data/2.5/weather",
+                        dataType: "json",
+                        data: {
+                          "lat": mLat,
+                          "lon": mLon,
+                          "appid": "7b5f7d431e8579748f1833ce4db14312"
+                        },
+                        success: function(result, status) {
+                            console.log(result);
+                        },
+                        error: function(request,status,errorThrown) {
+                          console.log("\nSTATUS: " + status + "\nERROR: " + errorThrown);
+                        }
+                  });
+                  e.preventDefault();
+              });
+
+            })
+          });
+        </script>
+
+  	</div>
+
+<%- include ('templates/footer'); -%>

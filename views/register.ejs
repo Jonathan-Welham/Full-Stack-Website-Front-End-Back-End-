@@ -12,10 +12,10 @@
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-       <li class="nav-item active"> <!--nav-item active highlights it-->
+       <li class="nav-item"> <!--nav-item active highlights it-->
           <a class="nav-link" href="/login">Login</a>
        </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/register">Register</a>
         </li>
         <li class="nav-item">
@@ -25,18 +25,13 @@
   </div>
 </nav>
 
-
 <div class='container'>
 	<div class='jumbotron'>
-		<h3> User Login </h3>
+		<h3> User Registration </h3>
 		<a class='btn btn-primary' href='/'>Home</a>
 	</div>
 
-    <%if(typeof error != 'undefined' && error){%>
-        <h6 style='color: red;'> Incorrect login credentials! </h6>
-	<%}%>
-
-	<form action='/login' method='POST'>
+	<form action='/register' method='POST'>
 		<div class='form-group row'>
 			<label for='username' class='col-sm-4 col-form-label'>Username</label>
 			<div class='col-sm-4'>
@@ -52,11 +47,11 @@
 		<div class='form-group row'>
 			<div class='col-sm-4'></div>
 			<div class='col-sm-4'>
-				<button class='btn btn-primary btn-block'>Login</button>
+				<button class='btn btn-info btn-block'>Register</button>
 			</div>
 			<div class='col-sm-4'></div>
 		</div>
 	</form>
 </div>
 
-<%- include ('templates/header'); -%>
+<%- include ('templates/footer'); -%>
