@@ -26,23 +26,22 @@
 </nav>
 
   <div class='container text-center'>
-  	<div class='jumbotron'>
+  	<div class='jumbotron bg-info'>
 
-      <button type="button" class="btn btn-secondary" name="showAjax" id="showAjax">Show</button>
-        <div>
+      <button type="button" class="btn btn-secondary" name="showAjax" id="showAjax">Show Weather for <%=cityName%></button>
+
+        <div class="inner" name="ajaxResults" id="ajaxResults">
             <p id="weatherType"> Weather Currently: </p>
         </div>
 
         <script type="text/javascript">
           $(document).ready(function(){
             $("body").on("click", '#showAjax', function(e){
-              console.log("Button Clicked");
-
+              $(".inner").empty();
               $.get('weathersearchData', {}, function(data){
                 e.preventDefault();
                   var mLon = Math.floor(data.mLon * 100) / 100;
                   var mLat = Math.floor(data.mLat * 100) / 100;
-                  console.log(mLon + " " + mLat);
                   $.ajax({
                     method: "GET",
                         url:"http://api.openweathermap.org/data/2.5/weather",
@@ -50,10 +49,19 @@
                         data: {
                           "lat": mLat,
                           "lon": mLon,
-                          "appid": "7b5f7d431e8579748f1833ce4db14312"
+                          "appid": "7b5f7d431e8579748f1833ce4db14312",
+                          "units": "metric"
                         },
                         success: function(result, status) {
                             console.log(result);
+                            $('.inner').append("<img src='http://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png' alt='weatherIcon'><br>");
+                            $('.inner').append("Humidity: " + result.main["humidity"] + "<br>");
+                            $('.inner').append("Weather: " + result.weather[0].description + "<br>");
+                            $('.inner').append("Tempature: " + result.main["temp"] + " C* <br>");
+                            $('.inner').append("Feels Like: " + result.main["feels_like"] + " C* <br>");
+                            $('.inner').append("Wind Speed: " + result.wind["speed"] + " mph<br>");
+                            $('.inner').append("Longitude: " + result.coord["lon"] + "<br>");
+                            $('.inner').append("Latitude: " + result.coord["lat"] + "<br>");
                         },
                         error: function(request,status,errorThrown) {
                           console.log("\nSTATUS: " + status + "\nERROR: " + errorThrown);
