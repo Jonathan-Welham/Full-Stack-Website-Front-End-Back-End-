@@ -21,7 +21,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="/flights">Plan A Flight</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/userflights">My Flights</a>
         </li>
       </ul>
@@ -30,8 +30,13 @@
 
 <div class="container text-center">
   <div class="jumbotron">
-    <form action="index.html" method="post">
-
+    <form action="/planFlight" method="POST">
+      Destination City: <input type="text" id="dest" name="dest" placeholder="Destination"><br><br>
+      Departure City:   <input type="text" id="dept" name="dept" placeholder="Departure"><br><br>
+      Arrival Date:     <input type="date" id="arrd" name="arrd" placeholder="YYYY-MM-DD"><br><br>
+      Departure Date:   <input type="date" id="depd" name="depd" placeholder="YYYY-MM-DD"><br><br>
+      Seats Wanted:   <input type="number" id="seat" name="seat" placeholder="Seats"><br><br>
+      <button class="btn btn-success" name="addFlight">Add Flight To Planner</button>
     </form>
   </div>
 

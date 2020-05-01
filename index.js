@@ -1,6 +1,6 @@
 /* Database Table Names */
-let authorTable = `l9_author`;
-let quotesTable = `l9_quotes`;
+let airportsTable = `airports`
+let flightsTable = `flights`;
 let userTable = `users`;
 
 //Base Variables for Weather Data
@@ -156,7 +156,7 @@ app.post('/register', function(req, res){
     let salt = 10;
     bcrypt.hash(req.body.password, salt, function(error, hash){
         if(error) throw error;
-        let stmt = 'INSERT INTO users (username, password) VALUES (?, ?)';
+        let stmt = 'INSERT INTO users (username, password, flightsCount) VALUES (?, ?, 0)';
         let connection = herokuConnection();
         let data = [req.body.username, hash];
         connection.query(stmt, data, function(error, result){
@@ -210,9 +210,24 @@ app.get('/planFlight', isAuthenticated, function(req, res){
 });
 
 app.post('/planFlight', isAuthenticated, function(req, res){
+  // id="dest" name="dest" placeholder="Destination"><br><br>
+  //  id="dept" name="dept" placeholder="Departure"><br><br>
+  // Arrival Date:     <input type="date" id="arrd" name="arrd" placeholder="YYYY-MM-DD"><br><br>
+  // Departure Date:   <input type="date" id="depd" name="depd" placeholder="YYYY-MM-DD"><br><br>
+  // Seats Wanted:   <input type="number" id="seat" name="seat" placeholder="Seats"><br><br>
+  let destination  = req.body.dest; //String
+  let departure    = req.body.dept; //String
+  let arrivalDate  = req.body.arrd; //YYYY-MM-DD
+  let departDate   = req.body.depd; //YYYY-MM-DD
+  let seats        = req.body.seat; //Int
+  // if(destination == "" || departure == "" || arrivalDate == null || departDate== null || seats <= 0){
+  //   console.log("Field Left Blank!");
+  // } //checking for a empty field WIP
+  console.log(destination + " " + departure + " " + arrivalDate + " " + departDate + " " + seats);
 
+  let stmt = 'INSERT INTO flights';
 
-  res.render('/');
+  res.render('userflights');
 });
 
 app.get('/userflights', isAuthenticated, function(req, res){
