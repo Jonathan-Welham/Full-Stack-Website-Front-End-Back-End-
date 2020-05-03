@@ -89,6 +89,28 @@ p{
   text-align: center;
 }
 
+.userflightsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.planFlightContainer{
+  display: flex;
+  border: 9px solid black;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.planFlightContainer > form{
+  text-align: left;
+}
+
 #invisible{
   visibility: hidden;
 }
@@ -136,7 +158,6 @@ p{
   width:700px;
   height: 400px;
 
-
 }
 
 .footer{
@@ -144,7 +165,7 @@ p{
   padding-bottom:2px;
   font-size: 1em;
   text-decoration: center;
-  color:white
+  color: white;
 }
 
 .header, .footer {
@@ -155,4 +176,8 @@ p{
     color: white;
     background-color: gray;
     border-color: #007bff;
+}
+
+#flightTable{
+
 }

@@ -31,30 +31,31 @@
   </div>
 </nav>
 
-<div class="container text-center">
-  <div class="jumbotron">
-    <h1>List of User Flights</h1>
-    <table>
+<div class="userflightsContainer">
+  <h1>Flights reserved by User</h1>
+  <table>
+    <tr>
+      <th>Flight ID</th>
+      <th>Destination Location</th>
+      <th>Departure Location</th>
+      <th>Date of Arrival</th>
+      <th>Date of Departure</th>
+      <th>Amount of Seats</th>
+    </tr>
+  <% results.forEach(function(result){ %>
+    <div>
       <tr>
-        <th>Flight ID</th>
-        <th>Destination Location</th>
-        <th>Departure Location</th>
-        <th>Date of Arrival</th>
-        <th>Date of Departure</th>
-        <th>Amount of Seats</th>
+        <td><%=result.idflights%></td>
+        <td><%=result.destination%></td>
+        <td><%=result.departure%></td>
+        <td><%=result.destinationDay%></td>
+        <td><%=result.departureDay%></td>
+        <td><%=result.seats%></td>
+        <td><a class="btn btn-link" href="/userflights/<%= result.idflights %>/delete" name="deleteBtn">Delete Flight</a></td>
       </tr>
-      <% results.forEach(function(result){ %>
-          <tr>
-            <td><%=result.idflights%></td>
-            <td><%=result.destination%></td>
-            <td><%=result.departure%></td>
-            <td><%=result.destinationDay%></td>
-            <td><%=result.departureDay%></td>
-            <td><%=result.seats%></td>
-            <td><a class="btn btn-link" href="/userflights/<%= result.idflights %>/delete" name="deleteBtn">Delete Flight</a></td>
-          </tr>
-        </div>
-     <%});%>
-     </div>
-     </div>
+    </div>
+    <%});%>
+  </table>
+</div>
+
 <%- include ('templates/footer'); -%>
