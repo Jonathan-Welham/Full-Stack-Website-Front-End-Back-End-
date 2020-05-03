@@ -40,7 +40,7 @@ p{
   flex-direction: column;
   padding: 25px;
   margin: 35px;
-  border: 7px solid #4C4646;
+  border: 7px solid #A4D1E1;
   border-radius: 25px;
 }
 
@@ -59,10 +59,14 @@ p{
   word-wrap: normal;
   padding: 25px;
   margin: 35px;
-  border: 7px solid #4C4646;
+  border: 7px solid #A4D1E1;
   border-radius: 25px;
   /* opacity: 0.8; */
   /* background-color: ; */
+}
+
+#index3{
+  background-color: #A4D1E1;
 }
 
 .containerLogin{
@@ -102,9 +106,14 @@ p{
 
 .planFlightContainer{
   display: flex;
-  border: 9px solid black;
+  border: 5px solid black;
+  border-radius: 5px;
   justify-content: space-around;
   background-color: white;
+  padding: 50px;
+  width: 250px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .planFlightContainer > form{
@@ -113,10 +122,6 @@ p{
 
 #invisible{
   visibility: hidden;
-}
-
-#index3{
-  background-color: #e6fff3;
 }
 
 #index3 > div{
