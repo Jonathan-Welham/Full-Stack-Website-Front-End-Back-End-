@@ -15,7 +15,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var app = express();
 
 app.set("view engine", "ejs");
@@ -45,7 +45,7 @@ function herokuConnection() {
     host:'d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     user:'tzlry3naw0wu3zx2',
     password:'v3iz92y0cpypv8cn',
-    database:'wtczbcjgyshsp8x5' 
+    database:'wtczbcjgyshsp8x5'
   });
   return con;
 }
