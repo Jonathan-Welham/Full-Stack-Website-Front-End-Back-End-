@@ -40,7 +40,7 @@ p{
   flex-direction: column;
   padding: 25px;
   margin: 35px;
-  border: 7px solid #4C4646;
+  border: 7px solid #A4D1E1;
   border-radius: 25px;
 }
 
@@ -59,10 +59,14 @@ p{
   word-wrap: normal;
   padding: 25px;
   margin: 35px;
-  border: 7px solid #4C4646;
+  border: 7px solid #A4D1E1;
   border-radius: 25px;
   /* opacity: 0.8; */
   /* background-color: ; */
+}
+
+#index3{
+  background-color: #A4D1E1;
 }
 
 .containerLogin{
@@ -89,12 +93,35 @@ p{
   text-align: center;
 }
 
-#invisible{
-  visibility: hidden;
+.userflightsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
 }
 
-#index3{
-  background-color: #e6fff3;
+.planFlightContainer{
+  display: flex;
+  border: 5px solid black;
+  border-radius: 5px;
+  justify-content: space-around;
+  background-color: white;
+  padding: 50px;
+  width: 250px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.planFlightContainer > form{
+  text-align: left;
+}
+
+#invisible{
+  visibility: hidden;
 }
 
 #index3 > div{
@@ -136,7 +163,6 @@ p{
   width:700px;
   height: 400px;
 
-
 }
 
 .footer{
@@ -144,7 +170,7 @@ p{
   padding-bottom:2px;
   font-size: 1em;
   text-decoration: center;
-  color:white
+  color: white;
 }
 
 .header, .footer {
@@ -155,4 +181,8 @@ p{
     color: white;
     background-color: gray;
     border-color: #007bff;
+}
+
+#flightTable{
+
 }

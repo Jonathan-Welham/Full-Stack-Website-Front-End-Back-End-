@@ -30,19 +30,18 @@
       </ul>
   </div>
 </nav>
-
-<div class="container text-center">
-  <div class="jumbotron">
-    <form action="/planFlight" method="POST">
-      Destination City: <input type="text" id="dest" name="dest" placeholder="Destination"><br><br>
-      Departure City:   <input type="text" id="dept" name="dept" placeholder="Departure"><br><br>
-      Arrival Date:     <input type="date" id="arrd" name="arrd" placeholder="YYYY-MM-DD"><br><br>
-      Departure Date:   <input type="date" id="depd" name="depd" placeholder="YYYY-MM-DD"><br><br>
-      Seats Wanted:   <input type="number" id="seat" name="seat" placeholder="Seats"><br><br>
-      <button class="btn btn-success" name="addFlight">Add Flight To Planner</button>
-    </form>
+<div class='plannerHolder'>
+  <div class="planFlightContainer">
+    <div>
+      <form action="/planFlight" method="POST">
+        Destination City: <input type="text" id="dest" name="dest" placeholder="Destination"><br><br>
+        Departure City:   <input type="text" id="dept" name="dept" placeholder="Departure"><br><br>
+        Arrival Date:     <input type="date" id="arrd" name="arrd" placeholder="YYYY-MM-DD"><br><br>
+        Departure Date:   <input type="date" id="depd" name="depd" placeholder="YYYY-MM-DD"><br><br>
+        Seats:            <input type="number" id="seat" name="seat" placeholder="Seats"><br><br>
+        <button class="btn btn-success" name="addFlight">Add Flight To Planner</button>
+      </form>
+    </div>
   </div>
-
 </div>
-
 <%- include ('templates/footer'); -%>
