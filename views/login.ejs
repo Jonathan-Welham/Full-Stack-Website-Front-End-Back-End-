@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="/home">Welcome Skimpy Airlines</a>
+  <a class="navbar-brand" href="/home">Skimpy Airlines</a>
 
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -27,32 +27,32 @@
 
 
 <div class='container'>
-	<div class='jumbotron'>
-		<h3> User Login </h3>
+  <!-- <div class='containe0' id='invisible'> </div> -->
+  <div class='insideLogin'>
+		<h3> Login To Skimpy </h3>
 			<form action='/login' method='POST'>
-		<div class='form-group row'>
-			<label for='username' class='col-sm-4 col-form-label'>Username</label>
-			<div class='col-sm-4'>
-				<input type='text' class='form-control' id='username' name='username' placeholder='username' required>
-			</div>
-		</div>
-		<div class='form-group row'>
-			<label for='password' class='col-sm-4 col-form-label'>Password</label>
-			<div class='col-sm-4'>
-				<input type='password' class='form-control' id='password' name='password' placeholder='****' required>
-			</div>
-		</div>
-		<div class='form-group row'>
-			<div class='col-sm-4'></div>
-			<div class='col-sm-4'>
-				<button class='btn btn-primary btn-block'>Login</button>
-			</div>
-			<div class='col-sm-4'></div>
-		</div>
-	</form>
-		
-	</div>
-
+  		<div class='form-group row'>
+  			<label for='username' class='col-sm-4 col-form-label'></label>
+  			<div class='col-sm-4'>
+  				<input type='text' class='form-control' id='username' name='username' placeholder='username' required>
+  			</div>
+  		</div>
+  		<div class='form-group row'>
+  			<label for='password' class='col-sm-4 col-form-label'></label>
+  			<div class='col-sm-4'>
+  				<input type='password' class='form-control' id='password' name='password' placeholder='password' required>
+  			</div>
+  		</div>
+  		<div class='form-group row'>
+  			<div class='col-sm-4'></div>
+  			<div class='col-sm-4'>
+  				<button class='btn btn-primary btn-block'>Login</button>
+  			</div>
+  			<div class='col-sm-4'></div>
+  		</div>
+  	</form>
+  </div>
+</div>
     <%if(typeof error != 'undefined' && error){%>
         <h6 style='color: red;'> Incorrect login credentials! </h6>
 	<%}%>

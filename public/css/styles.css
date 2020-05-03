@@ -1,14 +1,29 @@
 body{
   background-image: url("/image/airplane5.jpg");
- 
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 h1{
+  font-size: 40px;
   text-align: center;
-  font-style: italic;
+  font-style: oblique;
+}
+
+h2{
+  text-align: center;
+  font-style: oblique;
+}
+
+h3{
+  text-align: center;
+  padding: 30px;
+}
+
+p{
+  font-size: 17px;
 }
 
 .container{
@@ -25,9 +40,53 @@ h1{
   flex-direction: column;
   padding: 25px;
   margin: 35px;
-  border: 9px solid #4C4646;
+  border: 7px solid #4C4646;
   border-radius: 25px;
+}
 
+.container1{
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
+  margin: 35px;
+  border: 7px solid #4C4646;
+  border-radius: 25px;
+}
+
+.containerIntro{
+  display: flex;
+  flex-direction: column;
+  word-wrap: normal;
+  padding: 25px;
+  margin: 35px;
+  border: 7px solid #4C4646;
+  border-radius: 25px;
+  /* opacity: 0.8; */
+  /* background-color: ; */
+}
+
+.containerLogin{
+  display: flex;
+  flex-direction: row;
+  align-items: space-between space-around space-evenly stretch;
+  flex-wrap: wrap;
+  text-align: center;
+  border: 7px solid black;
+}
+
+.insideLogin{
+  background-color: white;
+  margin: 50px;
+  height: 300px;
+  width: 450px;
+  border-radius: 20px
+}
+
+.registerContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
 }
 
 #invisible{
@@ -35,17 +94,16 @@ h1{
 }
 
 #index3{
-  background-color: #D6D8C3;
+  background-color: #e6fff3;
 }
 
 #index3 > div{
     display: flex;
     flex-direction: column;
-
     justify-content: space-evenly;
     font-size: 25px;
     text-align: center;
-    margin: 5px;
+    margin: 30px;
 }
 
 #structure{
@@ -68,8 +126,8 @@ h1{
 .rightHolder{
   width: 300px;
 }
+
 .jumbotron{
-    
   opacity: 0.7;
   background-position: center;
   border-radius: 25px;
@@ -78,34 +136,23 @@ h1{
   width:700px;
   height: 400px;
 
-  
+
 }
 
 .footer{
-
   padding: 100px;
-
   padding-bottom:2px;
-
   font-size: 1em;
-
   text-decoration: center;
-
   color:white
-  
-   
-
 }
+
 .header, .footer {
-
   text-align: center;
-
 }
+
 .btn-primary {
     color: white;
     background-color: gray;
     border-color: #007bff;
-}
-h3{
-  text-align: center; 
 }

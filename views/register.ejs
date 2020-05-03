@@ -25,35 +25,35 @@
   </div>
 </nav>
 
-<div class='container'>
-	<div class='jumbotron'>
-			<h3 > User Registration  </h3>
-			<form action='/register' method='POST'>
-		<div class='form-group row'>
-			<label for='username' class='col-sm-4 col-form-label'>Username</label>
-			<div class='col-sm-4'>
-				<input type='text' class='form-control' id='username' name='username' placeholder='username' required>
-			</div>
-		</div>
-		<div class='form-group row'>
-			<label for='password' class='col-sm-4 col-form-label'>Password</label>
-			<div class='col-sm-4'>
-				<input type='password' class='form-control' id='password' name='password' placeholder='****' required>
-			</div>
-		</div>
-		<div class='form-group row'>
-			<div class='col-sm-4'></div>
-			<div class='col-sm-4'>
-				<button class='btn btn-info btn-block'>Register</button>
-			</div>
-			<div class='col-sm-4'></div>
-		</div>
-	</form>
-	
-	
+<div class='registerContainer'>
+	<div class='insideLogin'>
+		<h3> User Registration  </h3>
+		<form action='/register' method='POST'>
+		  <div class='form-group row'>
+  			<label for='username' class='col-sm-4 col-form-label'>Username</label>
+  			<div class='col-sm-4'>
+  				<input type='text' class='form-control' id='username' name='username' placeholder='username' required>
+  			</div>
+		  </div>
+		  <div class='form-group row'>
+  			<label for='password' class='col-sm-4 col-form-label'>Password</label>
+  			<div class='col-sm-4'>
+  				<input type='password' class='form-control' id='password' name='password' placeholder='****' required>
+  			</div>
+		  </div>
+		  <div class='form-group row'>
+			  <div class='col-sm-4'></div>
+			  <div class='col-sm-4'>
+				  <button class='btn btn-info btn-block'>Register</button>
+			  </div>
+			  <div class='col-sm-4'></div>
+		  </div>
+	   </form>
 	</div>
-
-
+  <!-- <div class='container0' id='invisible'>
+    container0
+  </div> -->
 </div>
+
 
 <%- include ('templates/footer'); -%>

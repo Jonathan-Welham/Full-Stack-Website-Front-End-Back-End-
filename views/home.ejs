@@ -4,7 +4,7 @@
  <script>
             $(document).ready(function(){
                 $.ajax({
-                    
+
                     method: "GET",
                     url: "https://pixabay.com/api/",
                     dataType: "json",
@@ -17,15 +17,15 @@
                         console.log(result.hits[0].largeImageURL)
                         $("body").css('background-image', `url(${result.hits[0].largeImageURL}`);
                     }
-                
+
                 });//ajax
             });//document
-       
+
 </script>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
-   <a class="navbar-brand" href="/home">Welcome Skimpy Airlines</a> 
+   <a class="navbar-brand" href="/home">Skimpy Airlines</a>
 
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -56,31 +56,49 @@
   </div>
 </nav>
 
+<div class='container'>
+  <div class='containerIntro' id='index3'>
+    <h1>Skimpy Airlines: Where We Skimp On Everything!</h1>
+    <div>
+      <p>
+        If you do not have an account with us please <a href="/register">register</a> to take full advantage of what we have to offer.
+      </p>
+      <p>
+        If you already have an account and would like to reserve a flight please <a href="/login">login</a> and begin your search.
+      </p>
+    </div>
+    <div>
+      <h2>COVID-19 Information</h2>
+      <p>Here at Skimpy Airlines we care about your well-being. Going forward we require that all passengers wear a face mask to reduce risk of potential contagion.</p>
+    </div>
+  </div>
+  <div class='container0' id='invisible'> </div>
+  <!-- <div class='container text-center'> -->
+  	 <div class='container0' id='index3'>
+  		<h2> Airline Inquery </h2>
 
-  <div class='container text-center'>
-  	 <div class='jumbotron'>
-  		<h2> Airflight Inquiries! </h2>
-      
-  	  <form action="/citysearch">	
-  			      Search For Cities With This Airport: <input type="text" name="airport" id="airport" placeholder="Airport Name">
+  	  <form action="/citysearch">
+  			      Search for Cities with: <br>
+              <input type="text" name="airport" id="airport" placeholder="Airport Name">
           		<button class="btn btn-success">Search</button>
   			<br><br>
         </form>
         <form action="/airportsearch">
-              Search For Airports In This City: <input type="text" name="city" id="city" placeholder="City Name">
+              Search for Airports in: <br>
+              <input type="text" name="city" id="city" placeholder="City Name">
               <button class="btn btn-success">Search</button>
         </form>
-        <br><br>
+        <br>
         <form action="/weathersearch">
-              Get The Monthly Weather Report For This City: <input type="text" name="weather" id="weather" placeholder="Location">
+              Get the Weather Report at: <br>
+              <input type="text" name="weather" id="weather" placeholder="Location">
               <button class="btn btn-success" id="weatherSearch">Search</button>
         </form>
-        <br><br>
         <div id="ajax">
 
         </div>
   	</div>
-  	</div>
-  	
+  </div>
+</div>
 
 <%- include ('templates/footer'); -%>
