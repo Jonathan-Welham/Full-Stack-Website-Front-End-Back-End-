@@ -12,12 +12,12 @@
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-       <li class="nav-item"> <!--nav-item active highlights it-->
+        <li class="nav-item"> <!--nav-item active highlights it-->
           <a class="nav-link" href="/login">Login</a>
-       </li>
-       <li class="nav-item"> <!--nav-item active highlights it-->
+        </li>
+        <li class="nav-item"> <!--nav-item active highlights it-->
           <a class="nav-link" href="/logout">Logout</a>
-       </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/register">Register</a>
         </li>
@@ -47,7 +47,7 @@
                   var mLat = Math.floor(data.mLat * 100) / 100;
                   $.ajax({
                     method: "GET",
-                        url:"http://api.openweathermap.org/data/2.5/weather",
+                        url:"https://api.openweathermap.org/data/2.5/weather",
                         dataType: "json",
                         data: {
                           "lat": mLat,
