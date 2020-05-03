@@ -1,12 +1,31 @@
 <%- include ('templates/header'); -%>
 
-<script>
 
+ <script>
+            $(document).ready(function(){
+                $.ajax({
+                    
+                    method: "GET",
+                    url: "https://pixabay.com/api/",
+                    dataType: "json",
+                    data: { "key": "13797838-1fc413dc8959408105de7daf0",
+                        "q": "airport",
+                        'orientation': 'horizontal'
+                    },
+                    success: function(result,status) {
+                        result.hits = _.shuffle(result.hits);
+                        console.log(result.hits[0].largeImageURL)
+                        $("body").css('background-image', `url(${result.hits[0].largeImageURL}`);
+                    }
+                
+                });//ajax
+            });//document
+       
 </script>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
-  <strong> <a class="navbar-brand" href="/home">Welcome Skimpy Airlines</a> </strong>
+   <a class="navbar-brand" href="/home">Welcome Skimpy Airlines</a> 
 
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
