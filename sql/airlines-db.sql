@@ -24,6 +24,28 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
 --
+-- Table structure for table `airports`
+--
+
+DROP TABLE IF EXISTS `airports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `airports` (
+  `code` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `cityCode` varchar(50) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `cityName` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `countryName` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `countryCode` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `timezone` varchar(8) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `lat` varchar(32) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `lon` varchar(32) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `numAirports` int(11) DEFAULT NULL,
+  `city` enum('true','false') COLLATE utf8_turkish_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `airports`
 --
 
@@ -34,6 +56,25 @@ INSERT INTO `airports` VALUES ('ANW','Ainsworth Minicipal Arpt','ANW','Ainsworth
 UNLOCK TABLES;
 
 --
+-- Table structure for table `flights`
+--
+
+DROP TABLE IF EXISTS `flights`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `flights` (
+  `idflights` int(11) NOT NULL AUTO_INCREMENT,
+  `idusers` int(11) DEFAULT NULL,
+  `destination` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `departure` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `departureDay` date DEFAULT NULL,
+  `destinationDay` date DEFAULT NULL,
+  `seats` double DEFAULT NULL,
+  PRIMARY KEY (`idflights`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `flights`
 --
 
@@ -42,6 +83,22 @@ LOCK TABLES `flights` WRITE;
 INSERT INTO `flights` VALUES (2,1,'there','here','2020-04-16','2020-04-07',2),(3,1,'there','here','2003-11-05','1997-01-07',3),(4,1,'there','here','2020-05-09','2020-01-09',2),(7,1,'there','here','2020-04-24','2020-04-09',2),(9,1,'here','there','2020-04-08','2020-03-30',2),(10,28,'Ventura','San jose','2020-04-30','2020-05-01',1),(12,1,'','','0000-00-00','0000-00-00',0),(13,1,'','','0000-00-00','0000-00-00',0),(14,1,'','','0000-00-00','0000-00-00',0),(15,1,'','','0000-00-00','0000-00-00',0),(16,1,'san francisco','new york','2020-10-05','2020-10-10',2),(17,1,'','','0000-00-00','0000-00-00',0),(18,1,'','','0000-00-00','0000-00-00',0),(19,1,'san francisco','new york','0000-00-00','0000-00-00',0),(20,1,'','','0000-00-00','0000-00-00',0),(26,35,'atlanta','','0000-00-00','0000-00-00',0),(28,35,'california','','0000-00-00','0000-00-00',0),(29,35,'utah','','0000-00-00','0000-00-00',0),(30,35,'oregon','','0000-00-00','0000-00-00',0),(31,35,'','','0000-00-00','0000-00-00',-11),(32,35,'','','0000-00-00','2022-01-05',0),(33,35,'','what','0000-00-00','0000-00-00',0),(34,38,'Shanghai','Los Angeles','2020-05-12','2020-05-13',1),(35,1,'san francisco','new york','2020-12-27','2020-12-31',1),(36,1,'san francisco','new york','2020-12-28','2020-12-31',4),(37,38,'Shanghai','Los Angeles','2020-05-03','2020-05-04',4);
 /*!40000 ALTER TABLE `flights` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `idusers` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `flightsCount` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idusers`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
@@ -63,4 +120,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-03 21:26:41
+-- Dump completed on 2020-05-03 21:23:32
