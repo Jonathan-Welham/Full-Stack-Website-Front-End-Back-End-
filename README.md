@@ -1,13 +1,17 @@
 For the final project of CST 336 (Internet Programming) our team created a full stack website. We implemented full front-end design as well as back-end database management system. Users can create an account, login/logout, book a flight, as well as search and plan flights and lastly, check the weather.
 
 Project Start: 4/6/20
+
 Project End:   5/4/20
 
 Contributors:
 
 Jonathan Welham 
+
 Email:jwelham@csumb.edu
+
 Phone: (714)595-6464
+
 Github Link: https://github.com/Jonathan-Welham
 
 
