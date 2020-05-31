@@ -1,5 +1,5 @@
 # Description: 
-For the final project of CST 336 (Internet Programming) our team created a full stack website. We implemented full front-end design as well as back-end database management system. Users can create an account, login/logout, book a flight, as well as search and plan flights and lastly, check the weather.
+For the final project of CST 336 (Internet Programming) our team created a flight reservation website. We implemented full front-end design as well as back-end database management system. Users can create an account, login/logout, book a flight, as well as search and plan flights and lastly, check the weather.
 
 # Elapsed Time
 Project Start: 4/6/20
@@ -28,8 +28,8 @@ Project End:   5/4/20
 
 
 # Website Sample Link:
-https://cst336finalproject1.herokuapp.com
+[Flight Reservation Website](https://cst336finalproject1.herokuapp.com)
 
 # 3rd Party Credit:
-(Airports table containing 8,800 known airports and their coordinates)
-https://gist.github.com/tanerdogan/10103011
+Airports table containing 8,800 known airports and their coordinates
+- https://gist.github.com/tanerdogan/10103011
