@@ -11,9 +11,7 @@ Project End:   5/4/20
 ### Jonathan Welham 
 
 - Email: jwelham@csumb.edu
-
 - Phone: (714)595-6464
-
 - Github Link: https://github.com/Jonathan-Welham
 
 ### Daniel Jacoby
